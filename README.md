@@ -1,5 +1,4 @@
 # Sorvetop
-Projeto de sorveteria para desenvolvimento web
 
 Desenvolvido por Afonso Junior, Caio Vinnicius, Pedro Onuki e Rafaela Duque. 
 
