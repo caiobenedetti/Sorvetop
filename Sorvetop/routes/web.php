@@ -31,6 +31,6 @@ Route::post('/funcionario','FuncionarioController@store')->name('funcionario.sto
 Route::get('/funcionario/{id}','FuncionarioController@show')->name('funcionario.show');
 Route::get('/funcionario/{id}/edit','FuncionarioController@edit')->name('funcionario.edit');
 Route::put('/funcionario/{id}','FuncionarioController@update')->name('funcionario.update');
-Route::delete('/funcionario/{id}/delete','FuncionarioController@destroy')->name('funcionario.destroy');
+Route::get('/funcionario/{id}/delete','FuncionarioController@destroy')->name('funcionario.destroy');
 
 

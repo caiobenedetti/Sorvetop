@@ -2,6 +2,7 @@
 
 namespace Sorvetop\Http\Controllers;
 
+use Sorvetop\Models\Funcionario;
 use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
@@ -13,7 +14,10 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        return view('funcionario.index');
+        $funcionarios = Funcionario::orderBy('id', 'desc')
+            ->paginate(6);
+        return view('funcionario.index', 
+            ['funcionarios' => $funcionarios]);
     }
 
     /**
@@ -23,7 +27,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('funcionario.create');
     }
 
     /**
@@ -34,7 +38,18 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $funcionario = new Funcionario;
+        $funcionario->nome = $request->nome;
+        $funcionario->endereco = $request->endereco;
+        $funcionario->telefone = $request->telefone;
+        $funcionario->salario = $request->salario;
+        // Salva os dados na tabela
+        $funcionario->save();
+
+        // Retorna para view index com uma flash message
+        return redirect()
+            ->route('funcionario.index')
+            ->with('status', 'Registro criado com sucesso!');
     }
 
     /**
@@ -45,7 +60,17 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-        //
+        // Localiza e retorna os dados de um registro pelo ID
+        $funcionario = Funcionario::findOrFail($id);
+
+        // Chama a view para exibir os dados na tela
+        return view(
+            'funcionario.show',
+            [
+                'funcionario' => $funcionario
+            ]
+        );    
+            
     }
 
     /**
@@ -56,7 +81,16 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Localiza o registro pelo seu ID
+        $funcionario = Funcionario::findOrFail($id);
+
+        // Chama a view com o formulário para edição do registro
+        return view(
+            'funcionario.edit',
+            [
+                'funcionario' => $funcionario
+            ]
+        );
     }
 
     /**
@@ -68,7 +102,18 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $funcionario = Funcionario::findOrFail($id);
+        $funcionario->nome = $request->nome;
+        $funcionario->endereco = $request->endereco;
+        $funcionario->telefone = $request->telefone;
+        $funcionario->salario = $request->salario;
+        // Salva os dados na tabela
+        $funcionario->save();
+
+        // Retorna para view index com uma flash message
+        return redirect()
+            ->route('funcionario.index')
+            ->with('status', 'Registro atualizado com sucesso!');
     }
 
     /**
@@ -79,6 +124,14 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $funcionario = Funcionario::findOrFail($id);
+
+        // Exclui o registro da tabela
+        $funcionario->delete();
+
+        // Retorna para view index com uma flash message
+        return redirect()
+            ->route('funcionario.index')
+            ->with('status', 'Registro excluído com sucesso!');
     }
 }
