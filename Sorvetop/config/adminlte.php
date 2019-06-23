@@ -111,7 +111,7 @@ return [
         'MAIN NAVIGATION',
         [
             'text' => 'Vendas',
-            'url' => 'admin/settings',
+            'url' => '/venda',
             'icon' => 'cart-arrow-down'
         ],
         
@@ -123,7 +123,7 @@ return [
         
         [
             'text' => 'Fornecedores',
-            'url' => 'admin/settings',
+            'url' => '/fornecedor',
             'icon' => 'truck'
         ],
         'ACCOUNT SETTINGS',

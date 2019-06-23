@@ -17,15 +17,12 @@ class CreateVendasTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('fun_id')->unsigned();
-            $table->integer('itn_id')->unsigned();
             $table->float('preco', 8, 2);
             $table->foreign('fun_id')
                 ->references('id')
                 ->on('funcionarios');
             
-            $table->foreign('itn_id')
-                ->references('id')
-                ->on('itens');    
+              
         });
     }
 

@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Rotas para as tabelas
+//Rotas para a tabela de funcionario
 
 Route::get('/funcionario','FuncionarioController@index')->name('funcionario.index');
 Route::get('/funcionario/create','FuncionarioController@create')->name('funcionario.create');
@@ -33,4 +33,22 @@ Route::get('/funcionario/{id}/edit','FuncionarioController@edit')->name('funcion
 Route::put('/funcionario/{id}','FuncionarioController@update')->name('funcionario.update');
 Route::get('/funcionario/{id}/delete','FuncionarioController@destroy')->name('funcionario.destroy');
 
+//Rotas para a tabela de fornecedores
+Route::get('/fornecedor','FornecedorController@index')->name('fornecedor.index');
+Route::get('/fornecedor/create','FornecedorController@create')->name('fornecedor.create');
+Route::post('/fornecedor','FornecedorController@store')->name('fornecedor.store');
+Route::get('/fornecedor/{id}','FornecedorController@show')->name('fornecedor.show');
+Route::get('/fornecedor/{id}/edit','FornecedorController@edit')->name('fornecedor.edit');
+Route::put('/fornecedor/{id}','FornecedorController@update')->name('fornecedor.update');
+Route::get('/fornecedor/{id}/delete','FornecedorController@destroy')->name('fornecedor.destroy');
 
+//Rotas para a tabela de vendas
+Route::get('/venda','VendaController@index')->name('venda.index');
+Route::get('/venda/create','VendaController@create')->name('venda.create');
+Route::post('/venda','VendaController@store')->name('venda.store');
+Route::get('/venda/{id}','VendaController@show')->name('venda.show');
+Route::get('/venda/{id}/edit','VendaController@edit')->name('venda.edit');
+Route::put('/venda/{id}','VendaController@update')->name('venda.update');
+Route::get('/venda/{id}/delete','VendaController@destroy')->name('venda.destroy');
+
+//Rotas para a tabela de Itens

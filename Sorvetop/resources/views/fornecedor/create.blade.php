@@ -4,7 +4,7 @@
    
 @section('content_header')
     <span style="font-size:20px">
-        <i class='fa fa-database'></i> Inserindo um novo registro de Funcionário</h1>
+        <i class='fa fa-database'></i> Inserindo um novo registro de Fornecedor</h1>
     </span>
 
     <ol class="breadcrumb">
@@ -12,7 +12,7 @@
             <a href="{{ route('home') }}">Dashboard</a>
         </li>
         <li>
-            <a href="{{ route('funcionario.index') }}">Lista de Funcionário</a>
+            <a href="{{ route('fornecedor.index') }}">Lista de Fornecedores</a>
         </li>
         <li class="active">Inserindo um novo registro</li>
     </ol>
@@ -25,7 +25,7 @@
         <div class="panel-heading">Formulário de inserção de registro</div>
         <div class="panel-body">
 
-            <form action="{{ route('funcionario.store') }}" method="post" role="form"> {{ csrf_field() }}
+            <form action="{{ route('fornecedor.store') }}" method="post" role="form"> {{ csrf_field() }}
 
                 <div class="form-group">
 
@@ -34,7 +34,7 @@
                         <span class="text-red">*</span>
                     </label>
 
-                    <input type="text" class="form-control {{ $errors->has('nome') ? 'is-invalid' : '' }}" id="nome" name="nome" placeholder="Nome do Funcionário" value="{{ old('nome') }}"> 
+                    <input type="text" class="form-control {{ $errors->has('nome') ? 'is-invalid' : '' }}" id="nome" name="nome" placeholder="Nome do Fornecedor" value="{{ old('nome') }}"> 
                     @if($errors->has('nome'))
                     <span class='invalid-feedback text-red'> {{ $errors->first('descricao') }}</span> 
                     @endif
@@ -58,19 +58,9 @@
                         <span class='invalid-feedback text-red'> {{ $errors->first('telefone') }}</span>  
                     @endif
 
-                    <label for="salario">
-                        Salario
-                        <span class="text-red">*</span>
-                    </label>
-
-                    <input type="number" class="form-control {{ $errors->has('salario') ? 'is-invalid' : '' }}" id="salario" name="salario" placeholder="Salario" value="{{ old('salario') }}"> 
-                    @if($errors->has('salario'))
-                        <span class='invalid-feedback text-red'> {{ $errors->first('salario') }}</span>  
-                    @endif
-
                 </div>
 
-                <a class="btn btn-default" href="{{ route('funcionario.index') }}">
+                <a class="btn btn-default" href="{{ route('fornecedor.index') }}">
                     <i class="fa fa-chevron-circle-left">Voltar</i>
                 </a>
 

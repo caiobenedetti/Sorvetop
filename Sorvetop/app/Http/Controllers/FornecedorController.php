@@ -2,10 +2,10 @@
 
 namespace Sorvetop\Http\Controllers;
 
-use Sorvetop\Models\Funcionario;
 use Illuminate\Http\Request;
+use Sorvetop\Models\Fornecedore;
 
-class FuncionarioController extends Controller
+class FornecedorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,11 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = Funcionario::orderBy('id', 'asc')
-            ->paginate(6);
-        return view('funcionario.index', 
-            ['funcionarios' => $funcionarios]);
+        $fornecedores = Fornecedore::orderBy('id', 'asc')->paginate(5);
+
+        return view('fornecedor.index', 
+            ['fornecedores' => $fornecedores]
+        );
     }
 
     /**
@@ -27,7 +28,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('funcionario.create');
+        return view('fornecedor.create');
     }
 
     /**
@@ -38,17 +39,16 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        $funcionario = new Funcionario;
-        $funcionario->nome = $request->nome;
-        $funcionario->endereco = $request->endereco;
-        $funcionario->telefone = $request->telefone;
-        $funcionario->salario = $request->salario;
+        $fornecedor = new Fornecedore;
+        $fornecedor->nome = $request->nome;
+        $fornecedor->endereco = $request->endereco;
+        $fornecedor->telefone = $request->telefone;
         // Salva os dados na tabela
-        $funcionario->save();
+        $fornecedor->save();
 
         // Retorna para view index com uma flash message
         return redirect()
-            ->route('funcionario.index')
+            ->route('fornecedor.index')
             ->with('status', 'Registro criado com sucesso!');
     }
 
@@ -61,16 +61,15 @@ class FuncionarioController extends Controller
     public function show($id)
     {
         // Localiza e retorna os dados de um registro pelo ID
-        $funcionario = Funcionario::findOrFail($id);
+        $fornecedor = Fornecedore::findOrFail($id);
 
         // Chama a view para exibir os dados na tela
         return view(
-            'funcionario.show',
+            'fornecedor.show',
             [
-                'funcionario' => $funcionario
+                'fornecedor' => $fornecedor
             ]
-        );    
-            
+        );
     }
 
     /**
@@ -82,13 +81,13 @@ class FuncionarioController extends Controller
     public function edit($id)
     {
         // Localiza o registro pelo seu ID
-        $funcionario = Funcionario::findOrFail($id);
+        $fornecedor = Fornecedore::findOrFail($id);
 
         // Chama a view com o formulário para edição do registro
         return view(
-            'funcionario.edit',
+            'fornecedor.edit',
             [
-                'funcionario' => $funcionario
+                'fornecedor' => $fornecedor
             ]
         );
     }
@@ -102,17 +101,16 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $funcionario = Funcionario::findOrFail($id);
-        $funcionario->nome = $request->nome;
-        $funcionario->endereco = $request->endereco;
-        $funcionario->telefone = $request->telefone;
-        $funcionario->salario = $request->salario;
+        $fornecedor = Fornecedore::findOrFail($id);
+        $fornecedor->nome = $request->nome;
+        $fornecedor->endereco = $request->endereco;
+        $fornecedor->telefone = $request->telefone;
         // Salva os dados na tabela
-        $funcionario->save();
+        $fornecedor->save();
 
         // Retorna para view index com uma flash message
         return redirect()
-            ->route('funcionario.index')
+            ->route('fornecedor.index')
             ->with('status', 'Registro atualizado com sucesso!');
     }
 
@@ -124,14 +122,14 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        $funcionario = Funcionario::findOrFail($id);
+        $fornecedor = Fornecedore::findOrFail($id);
 
         // Exclui o registro da tabela
-        $funcionario->delete();
+        $fornecedor->delete();
 
         // Retorna para view index com uma flash message
         return redirect()
-            ->route('funcionario.index')
+            ->route('fornecedor.index')
             ->with('status', 'Registro excluído com sucesso!');
     }
 }

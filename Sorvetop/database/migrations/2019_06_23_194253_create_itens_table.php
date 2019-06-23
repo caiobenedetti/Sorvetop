@@ -18,6 +18,11 @@ class CreateItensTable extends Migration
             $table->timestamps();
             $table->integer('qtd');
             $table->float('preco', 8, 2);
+            $table->integer('ven_id');
+            
+            $table->foreign('ven_id')
+                ->references('id')
+                ->on('vendas');  
         });
     }
 

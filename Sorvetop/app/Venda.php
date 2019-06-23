@@ -1,10 +1,10 @@
 <?php
 
-namespace Sorvetop\Models;
+namespace Sorvetop;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Fornecedor extends Model
+class Venda extends Model
 {
     //
 }
