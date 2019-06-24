@@ -4,7 +4,7 @@
     <meta name="csrf_token" content="{{ csrf_token() }}" />
 @section('content_header')
     <span style="font-size:20px">
-        <i class='fa fa-user'></i> Lista de Fornecedores
+        <i class='fa fa-truck'></i> Lista de Fornecedores
     </span>
 
     <a class="btn btn-success btn-sm" href="{{ route('fornecedor.create') }}">

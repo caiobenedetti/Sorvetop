@@ -52,3 +52,10 @@ Route::put('/venda/{id}','VendaController@update')->name('venda.update');
 Route::get('/venda/{id}/delete','VendaController@destroy')->name('venda.destroy');
 
 //Rotas para a tabela de Itens
+Route::get('/item','ItemController@index')->name('item.index');
+Route::get('/item/create','ItemController@create')->name('item.create');
+Route::post('/item','ItemController@store')->name('item.store');
+Route::get('/item/{id}','ItemController@show')->name('item.show');
+Route::get('/item/{id}/edit','ItemController@edit')->name('item.edit');
+Route::post('/item/{id}','ItemController@update')->name('item.update');
+Route::get('/item/{id}/delete','ItemController@destroy')->name('item.destroy');

@@ -3,11 +3,11 @@
 namespace Sorvetop\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Sorvetop\Models\Venda;
 use Sorvetop\Models\Item;
 use Illuminate\Support\Facades\DB;
 
-class VendaController extends Controller
+
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,7 @@ class VendaController extends Controller
      */
     public function index()
     {
-        $vendas = Venda::orderBy('id', 'asc')->paginate(5);
-
-        return view('venda.index', 
-            ['vendas' => $vendas]
-        );
+        
     }
 
     /**
@@ -30,8 +26,7 @@ class VendaController extends Controller
      */
     public function create()
     {
-        $items = [];
-        return view('venda.create');
+        return view('item.create');
     }
 
     /**
@@ -42,16 +37,17 @@ class VendaController extends Controller
      */
     public function store(Request $request)
     {
-        $venda = new Venda;
-        $venda->fun_id = $request->fun_id; 
-        $venda->preco = 0;
-
-        // Salva os dados na tabela
-        $venda->save();
-
+        $item = new Item;
+        $item->qtd = $request->qtd;
+        $item->preco = $item->qtd * 32;
+        $item->ven_id = $request->ven_id;
         
+        // Salva os dados na tabela
+        $item->save();
+
+        // Retorna para view index com uma flash message
         return redirect()
-            ->route('item.create')
+            ->route('venda.show', $item->ven_id)
             ->with('status', 'Registro criado com sucesso!');
     }
 
@@ -63,25 +59,7 @@ class VendaController extends Controller
      */
     public function show($id)
     {
-        $venda = Venda::findOrFail($id);
-        $item = DB::select('select * from items where ven_id = ?', [$id]);
-        $preco = 0;
-        for($i=0; $i<count($item); $i++){
-            $preco += get_object_vars($item[$i])['preco'];
-        }
-        $venda->preco = $preco;
-        $venda->save();
-
         
-        // Chama a view com o formulário para edição do registro
-        return view(
-            'venda.show',
-            [
-                'venda' => $venda,
-                'items' => $item
-
-            ]
-        );
     }
 
     /**
@@ -91,9 +69,11 @@ class VendaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        
-        
+    {   
+        $item = Item::findOrFail($id);
+        return view('item.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -105,11 +85,17 @@ class VendaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $item = Item::findOrFail($id);
+        $item->qtd = $request->qtd;
+        $item->preco = $item->qtd * 32;
+       
+        // Salva os dados na tabela
+        $item->save();
 
-         return redirect()
-            ->route('venda.edit', $id)
-            ->with('status', 'Registro criado com sucesso!');
-        
+        // Retorna para view index com uma flash message
+        return redirect()
+            ->route('venda.show', $item->ven_id)
+            ->with('status', 'Registro atualizado com sucesso!');
     }
 
     /**
@@ -120,14 +106,15 @@ class VendaController extends Controller
      */
     public function destroy($id)
     {
-        $venda = Venda::findOrFail($id);
-        DB::delete('delete from items where ven_id = ?', [$id]);
+        $item = Item::findOrFail($id);
+        $var = $item->ven_id;
         // Exclui o registro da tabela
-        $venda->delete();
+        $item->delete();
 
         // Retorna para view index com uma flash message
         return redirect()
-            ->route('venda.index')
+            ->route('venda.show', $var)
             ->with('status', 'Registro excluído com sucesso!');
+    
     }
 }

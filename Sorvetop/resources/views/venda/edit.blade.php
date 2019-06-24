@@ -12,7 +12,7 @@
         <a href="{{ route('home') }}">Dashboard</a>
     </li>
     <li>
-        <a href="{{ route('fornecedor.index') }}">Lista de Fornecedores</a>
+        <a href="{{ route('venda.index') }}">Lista de Fornecedores</a>
     </li>
     <li class="active">Alteração de dados</li>
 </ol>
@@ -20,7 +20,7 @@
 @stop
 @section('content')
 
-<form action="{{ route('fornecedor.update', $fornecedor->id) }}" method="post" role="form">
+<form action="{{ route('venda.update', $venda->id) }}" method="post" role="form">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">
 
@@ -38,7 +38,7 @@
 
                 <input type="text" class="form-control {{ $errors->has('nome') ? 'is-invalid' : '' }}"
                     id="nome" name="nome" placeholder="Nome do fornecedor"
-                    value="{{ $fornecedor->nome }}">
+                    value="{{ $venda->nome }}">
 
                 @if($errors->has('nome'))
                 <span class='invalid-feedback text-red'>
@@ -80,7 +80,7 @@
         <!-- panel-body -->
 
         <div class="panel-footer">
-            <a class="btn btn-default" href="{{ route('fornecedor.index') }}">
+            <a class="btn btn-default" href="{{ route('venda.index') }}">
                 <i class="fa fa-chevron-circle-left"></i> 
                 Voltar
             </a>

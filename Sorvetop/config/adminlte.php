@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'NAVEGAÇÃO PRINCIPAL',
         [
             'text' => 'Vendas',
             'url' => '/venda',
@@ -126,12 +126,7 @@ return [
             'url' => '/fornecedor',
             'icon' => 'truck'
         ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
+        
     ],
 
     /*
